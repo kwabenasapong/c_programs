@@ -9,8 +9,8 @@ int main(void)
 {
 
 	pid_t pid;
+	pid_t ppid;
 
-	printf("Before fork i was one\n");
 
 	pid = fork();
 
@@ -20,8 +20,18 @@ int main(void)
 		return (1);
 	}
 
-	printf("After fork i became two\n");
+	if (pid == 0)
+	{
+		sleep(40);
+		pid = getpid();
+		printf("PID: %u\n", pid);
+		printf("I am the child\n");
+	}
+	else
+	{
+		sleep(10);
+		ppid = getpid();
+		printf("PPID: %u\n", ppid);
+	}
 	return (0);
-
-
 }
