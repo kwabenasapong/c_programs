@@ -1,3 +1,4 @@
+#define DELIM " \t\r\n\a"
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -30,11 +31,11 @@ void executeShell(void)
 		if (!*userInput)
 			break;
 
-		breakDown = strtok(userInput, " \n");
+		breakDown = strtok(userInput, DELIM);
 		while (breakDown && i < 100)
 		{
 			cmd_par[i++] = breakDown;
-			breakDown = strtok(NULL, " \n");
+			breakDown = strtok(NULL, DELIM);
 		}
 		cmd_par[i] = NULL;
 
