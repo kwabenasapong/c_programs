@@ -5,51 +5,70 @@
 #include <stdlib.h>
 #include <string.h>
 
+char *getCmd(void)
+{
+	char *buf = NULL;
+	size_t n = 0;
+
+	getline(&buf, &n, stdin);
+	return (buf);
+}
+
+
+void executeShell(void)
+{
+	char *cmd_par[100];
+	char *userInput, *breakDown;
+	int i = 0, val_ex = 0;
+	pid_t pid;
+	int initiate = 1;
+
+	while (initiate)
+	{
+		printf("$ ");
+		userInput = getCmd();
+		if (!*userInput)
+			break;
+
+		breakDown = strtok(userInput, " \n");
+		while (breakDown && i < 100)
+		{
+			cmd_par[i++] = breakDown;
+			breakDown = strtok(NULL, " \n");
+		}
+		cmd_par[i] = NULL;
+
+		pid = fork();
+
+		if (pid == -1)
+			perror("ERROR");
+
+		if (pid == 0)
+		{
+			val_ex = execvp(cmd_par[0], cmd_par);
+			if (val_ex == -1)
+				perror("ERROR");
+
+			printf("Debugging child code\n");
+			printf("-----STATUS SYSCALLS-----\n");
+			printf("VAL_EX: %d\n", val_ex);
+			printf("Value CMD_PAR[0]: %s\n", cmd_par[0]);
+		}
+
+		else
+		{
+			wait(NULL);
+			printf("SHELL EXECUTION FINISHED\n");
+		}
+	}
+}
+
 /**
  * main - executes a program via execve
  * Return: 0 always
  */
 int main(void)
 {
-	pid_t pid;
-	char *argv[] = {NULL, NULL, NULL};
-	char *environ[] = {NULL};
-	int val = 0;
-	ssize_t num_chars = 0;
-	size_t n = 5;
-	char *buf = NULL;
-
-	pid = fork();
-
-	if (pid == -1)
-		return (-1);
-
-	if (pid == 0)
-	{
-		printf("$ ");
-
-		num_chars = getline(&buf, &n, stdin);
-		if (num_chars == -1)
-			perror("Error");
-
-		printf("buf: %s", buf);
-
-		argv[0] = buf;
-		printf("argv[0]: %s", argv[0]);
-		printf("argv: %s", *argv);
-
-		val = execve(argv[0], argv, environ);
-		if (val == -1)
-			perror("Error");
-
-		printf("Debugging child...\ngetline: %ld\nexevce: %d\n", num_chars, val);
-	}
-
-	else
-	{
-		wait(NULL);
-		printf("SHELL EXECUTION FINISHED\n");
-	}
-	free(buf);
+	executeShell();
 	return (0);
 }
