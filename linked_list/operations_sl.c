@@ -17,6 +17,21 @@ typedef struct node_sl node_sl;
 //node_sl *head;
 
 
+void printlist(node_sl *head)
+{
+	node_sl *temp;
+	int count;
+
+	temp = head;
+	count = 0;
+	do
+	{
+		printf("%d: %d\n", count, temp->data);
+		temp = temp->next;
+		count++;
+	} while (temp->next != NULL);
+}
+
 int main()
 {
   node_sl *head;
@@ -53,13 +68,8 @@ int main()
     scanf("%d", &choice);
 
   }
-  temp = head;
-  count = 0;
-  while (temp != NULL)
-  {
-    printf("%d: %d\n", count, temp->data);
-    temp = temp->next;
-    count++;
-  }
+
+  printlist(head);
+
   return 0;
 }

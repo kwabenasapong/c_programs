@@ -7,57 +7,54 @@ void printlist(node_sl *head)
 
 	temp = head;
 	count = 0;
-	while (temp->next != NULL)
+	do
 	{
 		printf("%d: %d\n", count, temp->data);
 		temp = temp->next;
 		count++;
-	}
-
+	} while (temp->next != NULL);
 }
 
-node_sl *create_node(node_sl *head, node_sl *new_node, int data)
+node_sl *create_node(node_sl *head)
 {
-	node_sl *temp = NULL;
+	node_sl *temp, *new_node;
+  int data, choice = 1;
 
-	//head = NULL;
-	//new_node = (node_sl *)malloc(sizeof(node_sl));
-	new_node->data = data;
+	//head = 0;
+	while (choice == 1)
+  {
+    new_node = (node_sl*)malloc(sizeof(node_sl));
 
-	if (head == NULL)
-	{
-		head = new_node;
-		temp = head;
-	}
-	else
-	{
-		temp->next = new_node;
-		temp = new_node;
-	}
-	free(new_node);
+    printf("Enter the data: ");
+    scanf("%d", &new_node->data);
+
+    new_node->next = NULL;
+
+    if (head == NULL)
+    {
+        head = new_node;
+        temp = head;
+    }
+    else
+    {
+        temp->next = new_node;
+        temp = new_node;
+
+    }
+
+    printf("Do you want to continue (0: No, 1: Yes) ? ");
+    scanf("%d", &choice);
+  }
 	return (head);
 }
 
 
 int main(void)
 {
-	node_sl *head = NULL, *new_node;
-	int choice, data;
+	node_sl *head;
 
-	new_node = (node_sl *)malloc(sizeof(node_sl));
-	new_node->next = NULL;
-	//new_node = 0;
-	choice = 1;
-	while (choice == 1)
-	{
-		printf("Enter the data to be store in list: \n");
-		data = new_node->data;
-		scanf("%d", &data);
-		head = create_node(head, new_node, data);
-		printf("do you want to continue (0: No | 1: Yes) ?\n");
-		scanf("%d", &choice);
-	}
+	head = 0;
+	head = create_node(head);
 	printlist(head);
-	printf("%d\n", new_node->data);
 	return (0);
 }
