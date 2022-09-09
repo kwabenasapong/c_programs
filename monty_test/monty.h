@@ -40,6 +40,15 @@ extern unsigned int line_number;
 
 /* Prototypes */
 char **tokenize(char *line_input);
+void push(stack_t **stack, unsigned int line_number);
+void pall(stack_t **stack, unsigned int line_number __attribute__((unused)));
+void pop(stack_t **stack, unsigned int line_number __attribute__((unused)));
+void pint(stack_t **stack, unsigned int line_number __attribute__((unused)));
+void swap(stack_t **stack, unsigned int line_number __attribute__((unused)));
+void add(stack_t **stack, unsigned int line_number __attribute__((unused)));
+void nop(stack_t **stack __attribute__((unused)), 
+		unsigned int line_number __attribute__((unused)));
+void sub(stack_t **stack, unsigned int line_number __attribute__((unused)));
 
 
 #endif /* MONTY_H */

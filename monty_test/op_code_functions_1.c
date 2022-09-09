@@ -10,11 +10,15 @@ void push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *new_node, *top;
 
+	//store function call to bring tokenize(2nd argument tokens) == <int>
+	//condition to check if <int> from {push <int>} is an integer
+	//if not print L<line_number>: usageL push integer\n Return(EXIT_FAILURE)
+
 	new_node = (stack_t *)malloc(sizeof(stack_t));
 
 	top = NULL;
 	new_node = NULL;
-	new_node->n = line_number;
+	//new_node->n = int
 	new_node->prev = NULL;
 	new_node->next = NULL;
 
@@ -44,6 +48,8 @@ void push(stack_t **stack, unsigned int line_number)
  */
 void pall(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
+	if (stack == NULL)
+		return;
 	while ((*stack)->next != NULL)
 		(*stack) = (*stack)->next;
 

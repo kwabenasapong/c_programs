@@ -15,6 +15,7 @@ int main(int argc, char **argv)
 	size_t len = 0;
 	ssize_t nread;
 	unsigned int line_number = 1;
+	char **tokens;
 	//char **token = NULL;
 
 	if (argc != 2 || argv[1] == NULL)
@@ -29,7 +30,8 @@ int main(int argc, char **argv)
 	{
 		printf("%d: ", line_number);
 		fwrite(line, nread, 1, stdout);
-		tokenize(line);
+		tokens = tokenize(line);
+		printf("%s, %d\n", tokens[0], atoi(tokens[1]));
 		line_number++;
 	}
 
