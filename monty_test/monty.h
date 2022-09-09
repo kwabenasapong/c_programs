@@ -1,5 +1,6 @@
 #ifndef _MONTY_H_
 #define _MONTY_H_
+#define _GNU_SOURCE
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -40,6 +41,7 @@ extern unsigned int line_number;
 
 /* Prototypes */
 char **tokenize(char *line_input);
+char *getline_input(FILE *stream);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number __attribute__((unused)));
 void pop(stack_t **stack, unsigned int line_number __attribute__((unused)));

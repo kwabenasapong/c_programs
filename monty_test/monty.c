@@ -1,5 +1,4 @@
 #include "monty.h"
-#define _GNU_SOURCE
 
 
 /**
@@ -11,12 +10,9 @@
 int main(int argc, char **argv)
 {
 	FILE *stream;
-	char *line = NULL;
-	size_t len = 0;
-	ssize_t nread;
-	unsigned int line_number = 1;
+	unsigned int line_number = 0;
 	char **tokens;
-	//char **token = NULL;
+	char *lines; /* = malloc(sizeof(char *) * 100); */
 
 	if (argc != 2 || argv[1] == NULL)
 	{
@@ -26,16 +22,16 @@ int main(int argc, char **argv)
 
 	stream = fopen(argv[1], "r");
 
-	while ((nread = getline(&line, &len, stream)) != -1)
+
+	while (lines)
 	{
-		printf("%d: ", line_number);
-		fwrite(line, nread, 1, stdout);
-		tokens = tokenize(line);
+		lines = getline_input(stream);
+		tokens = tokenize(lines);
+		printf("%d: %s\n", ++line_number, lines);
 		printf("%s, %d\n", tokens[0], atoi(tokens[1]));
-		line_number++;
 	}
 
-	free(line);
+	/* free(lines); */
 	fclose(stream);
 	return (EXIT_SUCCESS);
 }

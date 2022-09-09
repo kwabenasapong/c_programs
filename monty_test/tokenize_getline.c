@@ -20,7 +20,7 @@ char **tokenize(char *line_input)
 	while (token)
 	{
 		tokens[i] = token;
-		//printf("%d: %s\n", i, tokens[i]);//Add code to check opcode
+		/* printf("%d: %s\n", i, tokens[i]);//Add code to check opcode */
 		token = strtok(NULL, delim);
 		i++;
 	}
