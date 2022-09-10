@@ -9,16 +9,24 @@
 void push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *new_node, *top;
+	char **tokens;
+	int stack_data;
+	char *lines = lines;
 
-	//store function call to bring tokenize(2nd argument tokens) == <int>
-	//condition to check if <int> from {push <int>} is an integer
-	//if not print L<line_number>: usageL push integer\n Return(EXIT_FAILURE)
+	tokens = tokenize(lines);
+	stack_data = atoi(tokens[1]);
+
+	if (isdigit(stack_data) == 0)
+	{
+		printf("L%d: usage push integer\n", line_number);
+		exit(EXIT_FAILURE);
+	}
 
 	new_node = (stack_t *)malloc(sizeof(stack_t));
 
 	top = NULL;
 	new_node = NULL;
-	//new_node->n = int
+	new_node->n = stack_data;
 	new_node->prev = NULL;
 	new_node->next = NULL;
 

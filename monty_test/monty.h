@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 
 /**
@@ -37,7 +38,8 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-extern unsigned int line_number;
+/* extern unsigned int line_number; */
+extern char *lines;
 
 /* Prototypes */
 char **tokenize(char *line_input);
@@ -48,9 +50,9 @@ void pop(stack_t **stack, unsigned int line_number __attribute__((unused)));
 void pint(stack_t **stack, unsigned int line_number __attribute__((unused)));
 void swap(stack_t **stack, unsigned int line_number __attribute__((unused)));
 void add(stack_t **stack, unsigned int line_number __attribute__((unused)));
-void nop(stack_t **stack __attribute__((unused)), 
+void nop(stack_t **stack __attribute__((unused)),\
 		unsigned int line_number __attribute__((unused)));
 void sub(stack_t **stack, unsigned int line_number __attribute__((unused)));
-
+void (*comp_opc_func(char *s))(stack_t **stack, unsigned int line_number);
 
 #endif /* MONTY_H */

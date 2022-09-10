@@ -68,5 +68,5 @@ void add(stack_t **stack, unsigned int line_number __attribute__((unused)))
 	result = top->n + prev_node->n;
 	prev_node->n = result;
 	prev_node->next = NULL;
-	pop(top);
+	pop(&top, line_number);
 }
