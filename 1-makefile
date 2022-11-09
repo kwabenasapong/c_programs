@@ -1,0 +1,16 @@
+RM = rm -f
+
+all: hi next files
+
+files:
+	@touch file1.c file2.c file3.c
+next:
+	@echo 'last to be called'
+hi: hello
+	@echo 'hello second to be called'
+hello:
+	@echo 'hello first to be called'
+
+clean:
+	$(RM) file3.c
+
