@@ -53,6 +53,6 @@ void add(stack_t **stack, unsigned int line_number __attribute__((unused)));
 void nop(stack_t **stack __attribute__((unused)),\
 		unsigned int line_number __attribute__((unused)));
 void sub(stack_t **stack, unsigned int line_number __attribute__((unused)));
-void (*comp_opc_func(char *s))(stack_t **stack, unsigned int line_number);
+void comp_opc_func(char *s, stack_t **stack, unsigned int line_number);
 
 #endif /* MONTY_H */

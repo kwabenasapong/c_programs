@@ -5,19 +5,19 @@
  * main - entry to program to get input from stdin
  * Return: 0 always
  */
-int main(int argc, char **argv)
+int main(void)
 {
 	size_t n;
 	char *buf;
 
 	n = 5;
 
-	buf = *(argv + 1);
+	buf = NULL;
 
-	printf("Enter name ");
+	printf("$ ");
 	getline(&buf, &n, stdin);
 
-	printf("Name is %sBuffer is %ld\n", buf, n);
+	printf("%s\n", buf);
 
 	free(buf);
 

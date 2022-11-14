@@ -8,7 +8,7 @@
  * @line: from readline fucntion
  * Return: tokens of line
  */
- char **kbsh_spilt_line(char *line)
+char **kbsh_spilt_line(char *line)
 {
 	int bufsize = LSH_TOK_BUFSIZE, position = 0;
 	char **tokens = malloc(bufsize * sizeof(char*));

@@ -3,9 +3,11 @@
 /**
  * comp_opc_func - for getting comparing opcode instructions
  * @s: opcodes
+ * @stack: head pointer
+ * @line_number: instruction line number
  * Return: nothing
  */
-void (*comp_opc_func(char *s))(stack_t **stack, unsigned int line_number)
+void comp_opc_func(char *s, stack_t **stack, unsigned int line_number)
 {
 	int i = 0;
 
@@ -23,9 +25,16 @@ void (*comp_opc_func(char *s))(stack_t **stack, unsigned int line_number)
 
 	while (opcs[i].opcode)
 	{
-		if (opcs[i].opcode[0] == s[0] && s[1] == '\0')
-			return (opcs[i].f);
+		if (strcmp(opcs[i].opcode, s) == 0)
+		{
+			printf("Processing...\n");
+			opcs[i].f(stack, line_number);
+			printf("it works\n");
+			exit(EXIT_SUCCESS);
+		}
 		i++;
+
 	}
-	return (NULL);
+	fprintf(stderr, "L%d: unknown instruction %s", line_number, s);
+	exit(EXIT_FAILURE);
 }

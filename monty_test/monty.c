@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 	size_t len = 0;
 	ssize_t nread;
 	int num;
-	//stack_t *stack = NULL;
+	stack_t *stack = NULL;
 
 	if (argc != 2 || argv[1] == NULL)
 	{
@@ -34,12 +34,12 @@ int main(int argc, char **argv)
 	while ((nread = getline(&line, &len, stream)) != -1)
 	{
 		++line_number;
-		//lines = getline_input(stream);
 		tokens = tokenize(line);
 		num = atoi(tokens[1]);
-		printf("%d: %s\n", line_number, line);
+		printf("%d: %s", line_number, line);
 		printf("%s, %d\n", tokens[0], num);
-		//comp_opc_func(opcode)(&stack, line_number);
+		comp_opc_func(tokens[0], &stack, line_number);
+		free(tokens);
 	}
 
 	free(line);

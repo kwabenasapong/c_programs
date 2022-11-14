@@ -15,12 +15,15 @@ void push(stack_t **stack, unsigned int line_number)
 
 	tokens = tokenize(lines);
 	stack_data = atoi(tokens[1]);
+	//printf("%d", stack_data);
 
+	/*
 	if (isdigit(stack_data) == 0)
 	{
 		printf("L%d: usage push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
+	*/
 
 	new_node = (stack_t *)malloc(sizeof(stack_t));
 
